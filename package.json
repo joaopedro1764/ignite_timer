@@ -11,12 +11,18 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@hookform/resolvers": "^3.9.1",
     "@rocketseat/eslint-config": "^2.2.2",
     "D": "^1.0.0",
+    "date-fns": "^4.1.0",
+    "phosphor": "^0.7.1",
+    "phosphor-react": "^1.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.2",
     "react-router-dom": "^7.0.2",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

@@ -12,6 +12,7 @@ import {
   interruptCycleAsFinishedAction,
   markCurrentCycleAsFinishedAction,
 } from "../reducers/Cycle/action";
+import { differenceInSeconds } from "date-fns";
 
 interface NewCycleData {
   task: string;
@@ -44,7 +45,7 @@ export function CycleContextProvider({
       cycles: [],
       activeCycleId: null,
     },
-    () => {
+    (initialState) => {
       const storedStateAsJson = localStorage.getItem(
         "@ignite-timer:cycles-state-1.0.0"
       );
@@ -52,6 +53,8 @@ export function CycleContextProvider({
       if (storedStateAsJson) {
         return JSON.parse(storedStateAsJson);
       }
+
+      return initialState;
     }
   );
 
@@ -64,7 +67,12 @@ export function CycleContextProvider({
     localStorage.setItem("@ignite-timer:cycles-state-1.0.0", stateJSON);
   }, [cyclesState]);
 
-  const [amountSecondsPassed, setAmountSecondPassed] = useState(0);
+  const [amountSecondsPassed, setAmountSecondPassed] = useState(() => {
+    if (activeCycle) {
+      return differenceInSeconds(new Date(), new Date(activeCycle.startDate));
+    }
+    return 0;
+  });
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondPassed(seconds);
